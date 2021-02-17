@@ -1,115 +1,60 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
-import './App.css';
-import {TodoList} from "./TodoList";
-import DatePicker from 'react-datepicker';
+import './components/App.css';
 import 'react-datepicker/dist/react-datepicker.css';
-import moment from "moment";
-import {Login} from './components/Login'
+import {Login} from './components/Login';
+import {TodoApp} from './components/TodoApp';
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
+import CardMedia from '@material-ui/core/CardMedia';
+import Card from '@material-ui/core/Card';  
+import CardContent from '@material-ui/core/CardContent';
+
+const LoginView = () => (
+    <Login/>
+);
+
+const TodoAppView = () => (
+    <TodoApp/>
+);
 
 class App extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {items: [], text: '', priority: 0, dueDate: moment()};
-        this.handleTextChange = this.handleTextChange.bind(this);
-        this.handlePriorityChange = this.handlePriorityChange.bind(this);
-        this.handleDateChange = this.handleDateChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    constructor(props){
+        super(props)
+        this.state = {isLoggedIn : false}
+        this.handleLogChange = this.handleLogChange.bind(this);
     }
-
-
     render() {
+        console.log(this.state)
 
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">TODO React App</h1>
-                </header>
-                <form onSubmit={this.handleSubmit} className="todo-form">
-                    <h3>New TODO</h3>
-                    <label htmlFor="text" className="right-margin">
-                        Text:
-                    </label>
+            <Router>
+                <Card className="App">
+                    <CardMedia className="App-header">
+                        <img src={logo} className="App-logo" alt="logo"/>
+                        <h1 className="App-title">TODO React App</h1>
+                    </CardMedia>
+                    <br/>
+                    <br/>
+                    <CardContent>
+                        <ul>
+                            <li><Link to="/todo">Todo</Link></li> 
+                            <li><Link to="/">Login</Link></li> 
+                        </ul>
 
-                    <input
-                        id="text"
-                        onChange={this.handleTextChange}
-                        value={this.state.text}>
-                    </input>
-
-                    <br/>
-                    <br/>
-                    <label htmlFor="priority" className="right-margin">
-                        Priority:
-                    </label>
-
-                    <input
-                        id="priority"
-                        type="number"
-                        onChange={this.handlePriorityChange}
-                        value={this.state.priority}>
-                    </input>
-                    <br/>
-                    <br/>
-
-                    <DatePicker
-                        id="due-date"
-                        selected={this.state.dueDate}
-                        placeholderText="Due date"
-                        onChange={this.handleDateChange}>
-                    </DatePicker>
-                    <br/>
-                    <button>
-                        Add #{this.state.items.length + 1}
-                    </button>
-                </form>
-                <br/>
-                <br/>
-                <TodoList todoList={this.state.items}/>
-                <Login/>
-            </div>
+                        <div>
+                            { this.state.isLoggedIn ?
+                                <Route path="/todo" component={TodoAppView} /> :
+                                <Route exact path="/" component={LoginView} />  
+                            }                          
+                        </div>
+                    </CardContent>
+                </Card>
+            </Router>
         );
     }
-
-    handleTextChange(e) {
-        this.setState({
-            text: e.target.value
-        });
-    }
-
-    handlePriorityChange(e) {
-        this.setState({
-            priority: e.target.value
-        });
-    }
-
-    handleDateChange(date) {
-        this.setState({
-            dueDate: date
-        });
-    }
-
-    handleSubmit(e) {
-
-        e.preventDefault();
-
-        if (!this.state.text.length || !this.state.priority.length || !this.state.dueDate)
-            return;
-
-        const newItem = {
-            text: this.state.text,
-            priority: this.state.priority,
-            dueDate: this.state.dueDate,
-
-        };
-        this.setState(prevState => ({
-            items: prevState.items.concat(newItem),
-            text: '',
-            priority: '',
-            dueDate: ''
-        }));
+    handleLogChange() {
+        alert(this.state.isLoggedIn)
     }
 
 }
