@@ -262,4 +262,11 @@ Tip: You can use the Google Chrome Developer tools under the Application tab to 
 
 Hubo un inconveniente con localStorage.getItem("isLoogedIn"), cuando leía este dato, debía asegurarme de que estaba leyendo un string, de lo contrario siempre me retornaba true.
 ![](fotos/prueba3.JPG)
+
+
+## Nota
+Me apoye en los siguientes links para resolver algunos puntos:
+1. https://material-ui.com/components/text-fields/
+2. https://es.reactjs.org/docs/introducing-jsx.html
+3. https://www.codecademy.com/courses/react-101/lessons/react-jsx-advanced/exercises/jsx-conditionals-ternary
    
