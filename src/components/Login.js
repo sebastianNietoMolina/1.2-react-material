@@ -13,6 +13,16 @@ import './Login.css';
 
 export class Login extends React.Component{
 
+    constructor(props){
+        super(props)
+        this.state = {meail : '', password : ''}
+        this.mail = this.props.mail
+        this.pw = this.props.password
+        this.handleLog = this.handleLog.bind(this)
+        this.handlePassword = this.handlePassword.bind(this)
+        this.handleMail = this.handleMail.bind(this)
+    }
+
     render(){
         return (
             <React.Fragment>
@@ -23,12 +33,12 @@ export class Login extends React.Component{
                             <LockIcon />
                         </Avatar>
                         <Typography variant="h2">Sign in</Typography>
-                        <form className="form">
-                            <FormControl margin="normal" required fullWidth>
+                        <form className="form" onSubmit={this.handleLog} >
+                            <FormControl margin="normal" required fullWidth onChange={this.handleMail}>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>
                                 <Input id="email" name="email" autoComplete="email" autoFocus />
                             </FormControl>
-                            <FormControl margin="normal" required fullWidth>
+                            <FormControl margin="normal" required fullWidth onChange={this.handlePassword}>
                                 <InputLabel htmlFor="password">Password</InputLabel>
                                 <Input
                                     name="password"
@@ -43,6 +53,7 @@ export class Login extends React.Component{
                                 variant="contained"
                                 color="primary"
                                 className="submit"
+
                             >
                                 Sign in
                             </Button>
@@ -51,6 +62,29 @@ export class Login extends React.Component{
                 </main>
             </React.Fragment>
         );
+    }
+
+    handleMail(e) {
+        this.setState({
+            meail : e.target.value
+        })
+    }
+
+    handlePassword(e) {
+        this.setState({
+            password : e.target.value
+        })
+    }
+
+    handleLog() {
+        if(this.state.meail!==this.mail || this.state.password!==this.pw ){
+            alert("User or password incorrect")
+            localStorage.setItem('isLoogedIn', false)
+        }else{
+            localStorage.setItem('isLoogedIn', true)
+        }
+        console.log(localStorage.getItem('isLoogedIn') + "  que cambio")
+        return localStorage.getItem("isLoogedIn")
     }
 
 }

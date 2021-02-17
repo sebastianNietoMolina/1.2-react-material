@@ -9,27 +9,41 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Card from '@material-ui/core/Card';  
 import CardContent from '@material-ui/core/CardContent';
 
+const user = {
+    mail: localStorage.setItem('mail', "juan@gmail.com"),
+    password: localStorage.setItem('pw', "prueba")
+};
+
+const myData = {
+    mail : localStorage.getItem('mail'),
+    password : localStorage.getItem("pw")
+}
+
+
 const LoginView = () => (
-    <Login/>
+    <Login password={myData.password}  mail={myData.mail} /> 
 );
 
 const TodoAppView = () => (
-    <TodoApp/>
+    <TodoApp/> 
 );
+
 
 class App extends Component {
 
     constructor(props){
         super(props)
-        this.state = {isLoggedIn : false}
-        this.handleLogChange = this.handleLogChange.bind(this);
+        this.state = {isLoogedIn : false}
+        this.handleIslooged = this.handleIslooged.bind(this)
     }
-    render() {
-        console.log(this.state)
 
+
+    render() {
+        console.log(localStorage.getItem('isLoogedIn') + " llegando")
+        console.log(this.state.isLoogedIn)
         return (
             <Router>
-                <Card className="App">
+                <Card className="App" onSubmit={this.handleIslooged} >
                     <CardMedia className="App-header">
                         <img src={logo} className="App-logo" alt="logo"/>
                         <h1 className="App-title">TODO React App</h1>
@@ -38,25 +52,39 @@ class App extends Component {
                     <br/>
                     <CardContent>
                         <ul>
-                            <li><Link to="/todo">Todo</Link></li> 
                             <li><Link to="/">Login</Link></li> 
+                            <li><Link to="/todo">Todo</Link></li> 
                         </ul>
 
                         <div>
-                            { this.state.isLoggedIn ?
-                                <Route path="/todo" component={TodoAppView} /> :
-                                <Route exact path="/" component={LoginView} />  
-                            }                          
+                            <h1> { this.state.isLoogedIn ? "you already logged in" : "login please" } </h1>                           
+                            { this.state.isLoogedIn &&
+                                <Route path="/todo" component={TodoAppView} /> 
+                            }   
+                            <Route exact path="/" component={LoginView} />
                         </div>
                     </CardContent>
                 </Card>
             </Router>
         );
     }
-    handleLogChange() {
-        alert(this.state.isLoggedIn)
-    }
 
+    handleIslooged (e) {
+
+        e.preventDefault();
+
+        if( localStorage.getItem("isLoogedIn") == "true" ){
+            this.setState({
+                isLoogedIn : true
+            });
+        }else{
+            this.setState({
+                isLoogedIn : false
+            });
+        } 
+    }
 }
 
 export default App;
+
+

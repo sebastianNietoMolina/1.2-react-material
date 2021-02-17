@@ -109,9 +109,9 @@ export class TodoApp extends React.Component {
         const newItem = {
             text: this.state.text,
             priority: this.state.priority,
-            dueDate: this.state.dueDate,
-
+            dueDate: this.state.dueDate
         };
+
         this.setState(prevState => ({
             items: prevState.items.concat(newItem),
             text: 'text',
