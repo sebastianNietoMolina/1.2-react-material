@@ -145,6 +145,9 @@ Read more about how to organize your components [here] (https://reactjs.org/docs
 
 4. Add the Login component to the `App.js` render method in order to test your login component.
 
+## Prueba fotográfica parte 1.
+
+![](fotos/parte1.JPG)
 
 ## Part 2: Enable App Navigation 
 
@@ -225,6 +228,10 @@ Tip: Don't attempt to use the _Redirect_ component of the React Router to handle
 
 9. Set the default value of *isLoggedIn* to false and then add a condition inside the render method that renders the correct view.
 
+## Prueba fotográfica parte 2.
+
+Acá se quiere mostrar que, si no se ha iniciado sesión, no podrá interactuar con la tabla que esta en el enlace Todo, en particular la dejamos por defecto en false.
+![](fotos/prueba2.JPG)
 
 ## Part 3: Local Storage
 
@@ -250,4 +257,9 @@ This will prevent the user authentication every time!
 4. Run the application and then stop the server and verify the data is persisted.
 
 Tip: You can use the Google Chrome Developer tools under the Application tab to explore the Local Storage. 
+
+## Prueba fotográfica parte 3.
+
+Hubo un inconveniente con localStorage.getItem("isLoogedIn"), cuando leía este dato, debía asegurarme de que estaba leyendo un string, de lo contrario siempre me retornaba true.
+![](fotos/prueba3.JPG)
    
