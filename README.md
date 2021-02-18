@@ -260,6 +260,12 @@ Tip: You can use the Google Chrome Developer tools under the Application tab to 
 
 ## Prueba fotográfica parte 3.
 
+Para poder ingresar tienes que usar el siguiente usuario: 
+
+```
+  usuario: juan@gmail.com
+  contraseña: prueba
+```
 Hubo un inconveniente con localStorage.getItem("isLoogedIn"), cuando leía este dato, debía asegurarme de que estaba leyendo un string, de lo contrario siempre me retornaba true.
 ![](fotos/prueba3.JPG)
 
